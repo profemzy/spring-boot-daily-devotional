@@ -1,19 +1,30 @@
-version: '3'
+version: "3"
 
 services:
 
-  mysql-development:
+  db:
+    container_name: cs-mysql
+    env_file:
+      - ".env"
     image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_USER: profemzy
-      MYSQL_PASSWORD: pwd.001
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: development
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     ports:
-      - "3306:3306"
+      - "${DOCKER_MYSQL_PORT:-127.0.0.1:3306}:3306"
     volumes:
       - dev-db:/var/lib/mysql
+
+  app:
+    container_name: daily-devotional
+    env_file:
+      - ".env"
+    build:
+      context: "."
+    ports:
+      - "${DOCKER_WEB_PORT:-127.0.0.1:8080}:8080"
+    restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+    stop_grace_period: "${DOCKER_STOP_GRACE_PERIOD:-3s}"
+    links:
+      - db
 
 volumes:
   dev-db:
