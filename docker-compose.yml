@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  mysql-development:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_USER: profemzy
+      MYSQL_PASSWORD: pwd.001
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: development
+    ports:
+      - "3306:3306"
+    volumes:
+      - dev-db:/var/lib/mysql
+
+volumes:
+  dev-db:
