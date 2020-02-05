@@ -2,7 +2,18 @@
 
 Powered by [Femi Oladele](https://www.linkedin.com/in/profemzy/)
 
-DOCKER
+WITHOUT DOCKER
+--------------
+
+ To package the jar executable run: 
+./mvnw install 
+- Locate your jar at:
+target/dailydevotional-0.0.1-SNAPSHOT.jar 
+- Run the app with: 
+java -jar target/dailydevotional-0.0.1-SNAPSHOT.jar
+
+
+WITH DOCKER
 --------
 CREATE .ENV AND EDIT PARAMETERS AS DESIRED
 
